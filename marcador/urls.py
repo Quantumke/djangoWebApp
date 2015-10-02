@@ -11,4 +11,3 @@ urlpatterns = [
         name='marcador_bookmark_edit'),
     url(r'^$', 'marcador.views.bookmark_list', name='marcador_bookmark_list'),
 ]
-]
