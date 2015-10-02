@@ -17,6 +17,11 @@ class Meta:
 def __str__(self):
         return self.name
 
+class PublicBookmarkManager(models.Manager):
+    def get_queryset(self):
+        qs = super(PublicBookmarkManager, self).get_queryset()
+        return qs.filter(is_public=True)
+
 class Bookmark(models.Model):
     url = models.URLField()
     title = models.CharField('title', max_length=255)
@@ -27,6 +32,11 @@ class Bookmark(models.Model):
     owner = models.ForeignKey(User, verbose_name='owner',
         related_name='bookmarks')
     tags = models.ManyToManyField(Tag, blank=True)
+
+        objects = models.Manager()
+    public = PublicBookmarkManager()
+
+
 class Meta:
         verbose_name = 'bookmark'
         verbose_name_plural = 'bookmarks'
